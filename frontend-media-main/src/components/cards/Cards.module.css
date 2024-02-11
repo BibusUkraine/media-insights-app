@@ -1,0 +1,32 @@
+
+.cardSide{
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+}
+.cardFront{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .8s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+.cardBack{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .8s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transform: rotateY(180deg);
+}
+
+.cardSide:hover .cardFront{
+    transform: rotateY(180deg);
+}
+.cardSide:hover .cardBack{
+    transform: rotateY(0);
+}
