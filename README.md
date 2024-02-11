@@ -25,7 +25,7 @@ https://www.figma.com/file/cuftJMHgkZ4GE2YGzaXCVa/Weather-Forecast-UI?type=desig
 ## Setting up :rocket:
 1. Clone the repository:
 ```
-git clone https://github.com/BibusUkraine/weather-forecast-app.git
+git clone https://github.com/BibusUkraine/media-insights-app.git
 ```
 2. Up services:
 ```
