@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  media-insights-service:
+    image: media-insights-service:latest
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_CONNECTION_URL=jdbc:postgresql://media-insights-postgres:5432/media_insights_db?user=postgres&password=postgres
+      - INITIALIZE_ARTICLES_ON_STARTUP=true
+    depends_on:
+      - media-insights-elasticsearch
+      - media-insights-postgres
+    networks:
+      - media-insights-backend-network
+
+  media-insights-postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=media_insights_db
+    networks:
+      - media-insights-backend-network
+
+  media-insights-elasticsearch:
+    image: elasticsearch:8.8.0
+    restart: always
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    networks:
+      - media-insights-backend-network
+
+networks:
+  media-insights-backend-network:
+    driver: bridge
